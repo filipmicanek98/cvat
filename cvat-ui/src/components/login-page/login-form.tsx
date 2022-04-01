@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Intel Corporation
+// Copyright (C) 2022 Intel Corporation
 //
 // SPDX-License-Identifier: MIT
 
@@ -6,7 +6,7 @@ import React from 'react';
 import Form from 'antd/lib/form';
 import Button from 'antd/lib/button';
 import Input from 'antd/lib/input';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LockOutlined } from '@ant-design/icons';
 
 export interface LoginData {
     username: string;
@@ -21,26 +21,31 @@ interface Props {
 function LoginFormComponent(props: Props): JSX.Element {
     const { fetching, onSubmit } = props;
     return (
-        <Form onFinish={onSubmit} className='login-form'>
+        <Form layout='vertical' onFinish={onSubmit} className='login-form'>
             <Form.Item
                 hasFeedback
+                requiredMark='optional'
                 name='username'
+                label='Username'
                 rules={[
                     {
                         required: true,
                         message: 'Please specify a username',
                     },
                 ]}
+
             >
                 <Input
                     autoComplete='username'
-                    prefix={<UserOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    style={{ height: 40, borderRadius: 4 }}
                     placeholder='Username'
                 />
             </Form.Item>
 
             <Form.Item
                 hasFeedback
+                requiredMark='optional'
+                label='Password'
                 name='password'
                 rules={[
                     {
@@ -51,7 +56,8 @@ function LoginFormComponent(props: Props): JSX.Element {
             >
                 <Input
                     autoComplete='current-password'
-                    prefix={<LockOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    suffix={<LockOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    style={{ height: 40, borderRadius: 4 }}
                     placeholder='Password'
                     type='password'
                 />
@@ -62,6 +68,9 @@ function LoginFormComponent(props: Props): JSX.Element {
                     type='primary'
                     loading={fetching}
                     disabled={fetching}
+                    style={{
+                        width: '100%', borderRadius: 4, marginTop: 10, height: 40,
+                    }}
                     htmlType='submit'
                     className='login-form-button'
                 >

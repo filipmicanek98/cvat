@@ -6,17 +6,11 @@ import './styles.scss';
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, withRouter } from 'react-router-dom';
-import Title from 'antd/lib/typography/Title';
 import Text from 'antd/lib/typography/Text';
 import { Row, Col } from 'antd/lib/grid';
-import Button from 'antd/lib/button';
-import Divider from 'antd/lib/divider';
 import Layout from 'antd/lib/layout';
-
 import FooterDrawer from 'components/login-page/intel-footer-drawer';
-
-import consts from 'consts';
-import { OpenVINOIcon } from 'icons';
+import { Card } from 'antd';
 import LoginForm, { LoginData } from './login-form';
 
 interface LoginPageComponentProps {
@@ -26,66 +20,61 @@ interface LoginPageComponentProps {
 }
 
 function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps): JSX.Element {
-    const sizes = {
-        style: {
-            width: 400,
-        },
-    };
-
     const { Content } = Layout;
 
     const { fetching, onLogin, renderResetPassword } = props;
 
     return (
         <Layout>
-            <Content>
-                <Row style={{ height: '33%' }} />
+            <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Row justify='center' align='middle'>
-                    <Col {...sizes}>
-                        <Title level={2}> Login </Title>
-                        <LoginForm
-                            fetching={fetching}
-                            onSubmit={(loginData: LoginData): void => {
-                                onLogin(loginData.username, loginData.password);
-                            }}
-                        />
-                        <Row justify='start' align='top'>
-                            <Col>
-                                <Text strong>
-                                    New to CVAT? Create
-                                    <Link to='/auth/register'> an account</Link>
-                                </Text>
-                            </Col>
-                        </Row>
-                        {renderResetPassword && (
-                            <Row justify='start' align='top'>
-                                <Col>
-                                    <Text strong>
-                                        <Link to='/auth/password/reset'>Forgot your password?</Link>
-                                    </Text>
-                                </Col>
-                            </Row>
-                        )}
+                    <Card
+                        style={{
 
-                    </Col>
-                </Row>
-                <Row className='cvat-login-openvino-block' justify='center'>
-                    <Col {...sizes}>
-                        <Divider />
-                        <Text type='secondary'>
-                            Learn more about products of
-                            {/* It is important to keep the referer header here */}
-                            {/* eslint-disable-next-line react/jsx-no-target-blank */}
-                            <a target='_blank' rel='noopener' href={consts.OPENVINO_URL}> OpenVINO™ Toolkit </a>
-                        </Text>
-                        <Button
-                            href={consts.OPENVINO_URL}
-                            icon={<OpenVINOIcon />}
-                            block
-                            type='link'
-                            target='_blank'
-                        />
-                    </Col>
+                            padding: 40,
+                            width: 850,
+                            height: 500,
+                            borderRadius: 15,
+                            boxShadow: '0px 1px 3px rgba(0,1,1,0.1)',
+                        }}
+                    >
+                        <Row>
+
+                            <Col span={12}>
+
+                                <Row>
+                                    <Col>
+                                        <Row style={{ marginBottom: 15 }}>
+
+                                            <Text style={{ fontSize: 24, color: 'blue' }}> Annotation Software </Text>
+                                            <Text> Log in to your Annotation Software account</Text>
+
+                                        </Row>
+
+                                        <LoginForm
+                                            fetching={fetching}
+                                            onSubmit={(loginData: LoginData): void => {
+                                                onLogin(loginData.username, loginData.password);
+                                            }}
+                                        />
+
+                                        {renderResetPassword && (
+                                            <Row justify='start' align='top'>
+                                                <Col>
+                                                    <Text strong>
+                                                        <Link to='/auth/password/reset'>Forgot your password?</Link>
+                                                    </Text>
+                                                </Col>
+                                            </Row>
+                                        )}
+                                    </Col>
+                                </Row>
+
+                            </Col>
+                            <Col style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }} span={12}><Text>picture</Text></Col>
+
+                        </Row>
+                    </Card>
                 </Row>
             </Content>
             <FooterDrawer />
