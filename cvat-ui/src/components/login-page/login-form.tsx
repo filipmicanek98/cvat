@@ -33,13 +33,8 @@ function LoginFormComponent(props: Props): JSX.Element {
                         message: 'Please specify a username',
                     },
                 ]}
-
             >
-                <Input
-                    autoComplete='username'
-                    style={{ height: 40, borderRadius: 4 }}
-                    placeholder='Username'
-                />
+                <Input autoComplete='username' style={{ height: 40, borderRadius: 4 }} placeholder='Username' />
             </Form.Item>
 
             <Form.Item
@@ -69,12 +64,15 @@ function LoginFormComponent(props: Props): JSX.Element {
                     loading={fetching}
                     disabled={fetching}
                     style={{
-                        width: '100%', borderRadius: 4, marginTop: 10, height: 40,
+                        width: '100%',
+                        borderRadius: 4,
+                        marginTop: 10,
+                        height: 40,
                     }}
                     htmlType='submit'
                     className='login-form-button'
                 >
-                    Sign in
+                    Login
                 </Button>
             </Form.Item>
         </Form>

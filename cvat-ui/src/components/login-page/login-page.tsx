@@ -10,7 +10,9 @@ import Text from 'antd/lib/typography/Text';
 import { Row, Col } from 'antd/lib/grid';
 import Layout from 'antd/lib/layout';
 import FooterDrawer from 'components/login-page/intel-footer-drawer';
-import { Card } from 'antd';
+import { Card, Image } from 'antd';
+import { Footer, Header } from 'antd/lib/layout/layout';
+import { HeaderPicture } from 'icons';
 import LoginForm, { LoginData } from './login-form';
 
 interface LoginPageComponentProps {
@@ -26,11 +28,13 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
 
     return (
         <Layout>
+            <Header style={{ backgroundColor: 'white' }}>
+                <HeaderPicture />
+            </Header>
             <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Row justify='center' align='middle'>
                     <Card
                         style={{
-
                             padding: 40,
                             width: 850,
                             height: 500,
@@ -39,16 +43,12 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
                         }}
                     >
                         <Row>
-
                             <Col span={12}>
-
                                 <Row>
                                     <Col>
                                         <Row style={{ marginBottom: 15 }}>
-
                                             <Text style={{ fontSize: 24, color: 'blue' }}> Annotation Software </Text>
                                             <Text> Log in to your Annotation Software account</Text>
-
                                         </Row>
 
                                         <LoginForm
@@ -69,14 +69,25 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
                                         )}
                                     </Col>
                                 </Row>
-
                             </Col>
-                            <Col style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }} span={12}><Text>picture</Text></Col>
-
+                            <Col
+                                style={{ justifyContent: 'center', display: 'flex', alignItems: 'center' }}
+                                span={12}
+                            />
                         </Row>
                     </Card>
                 </Row>
             </Content>
+            <Footer
+                style={{
+                    justifyContent: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    backgroundColor: 'white',
+                }}
+            >
+                SatCen 2022 © All rights reserved | <a href='https://www.satcen.europa.eu/'> www.satcen.europa.eu</a>
+            </Footer>
             <FooterDrawer />
         </Layout>
     );
