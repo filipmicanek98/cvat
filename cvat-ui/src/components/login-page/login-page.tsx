@@ -10,10 +10,11 @@ import Text from 'antd/lib/typography/Text';
 import { Row, Col } from 'antd/lib/grid';
 import Layout from 'antd/lib/layout';
 import FooterDrawer from 'components/login-page/intel-footer-drawer';
-import { Card, Image } from 'antd';
+import { Card } from 'antd';
 import { Footer, Header } from 'antd/lib/layout/layout';
-import { HeaderPicture } from 'icons';
+import PictureWrapper from 'pictureWrapper';
 import LoginForm, { LoginData } from './login-form';
+import satcen from '../../assets/satcen.png';
 
 interface LoginPageComponentProps {
     fetching: boolean;
@@ -29,7 +30,7 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
     return (
         <Layout>
             <Header style={{ backgroundColor: 'white' }}>
-                <HeaderPicture />
+                <PictureWrapper src={satcen} />
             </Header>
             <Content style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Row justify='center' align='middle'>
@@ -86,7 +87,9 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
                     backgroundColor: 'white',
                 }}
             >
-                SatCen 2022 © All rights reserved | <a href='https://www.satcen.europa.eu/'> www.satcen.europa.eu</a>
+                SatCen 2022 © All rights reserved |
+                {' '}
+                <a href='https://www.satcen.europa.eu/'> www.satcen.europa.eu</a>
             </Footer>
             <FooterDrawer />
         </Layout>

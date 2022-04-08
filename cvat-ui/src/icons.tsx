@@ -4,7 +4,6 @@
 
 import React from 'react';
 
-import { Image } from 'antd';
 import SVGCVATLogo from './assets/cvat-logo.svg';
 import SVGCursorIcon from './assets/cursor-icon.svg';
 import SVGMoveIcon from './assets/move-icon.svg';
@@ -100,4 +99,3 @@ export const AzureProvider = React.memo((): JSX.Element => <SVGCVATAzureProvider
 export const S3Provider = React.memo((): JSX.Element => <SVGCVATS3Provider />);
 export const GoogleCloudProvider = React.memo((): JSX.Element => <SVGCVATGoogleCloudProvider />);
 export const OpenVINOIcon = React.memo((): JSX.Element => <SVGOpenVINO />);
-export const HeaderPicture = () => <Image src='./assets/SatCen_color.png' />;

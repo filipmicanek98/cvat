@@ -104,6 +104,14 @@ module.exports = (env) => ({
                 ],
             },
             {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                  {
+                    loader: 'file-loader',
+                  },
+                ],
+              },
+            {
                 test: /3rdparty\/.*\.worker\.js$/,
                 use: {
                     loader: 'worker-loader',
