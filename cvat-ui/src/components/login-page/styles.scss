@@ -18,10 +18,28 @@
     }
 }
 
+.background {
+    background-image: url("../../assets/login-page-background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+.login-form {
+    width: 100%,
+}
+
+.login-form-button {
+    background-color: #1a3765,
+}
+
 [title="Username"] {
-    color: blue !important;
+    color: #1a3765 !important;
+    font-weight: bold;
   }
 
   [title="Password"] {
-    color: blue !important;
+    color: #1a3765 !important;
+    font-weight: bold;
   }

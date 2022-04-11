@@ -6,7 +6,7 @@ import React from 'react';
 import Form from 'antd/lib/form';
 import Button from 'antd/lib/button';
 import Input from 'antd/lib/input';
-import { LockOutlined } from '@ant-design/icons';
+import { BoldOutlined, EyeFilled, EyeOutlined, LockOutlined } from '@ant-design/icons';
 
 export interface LoginData {
     username: string;
@@ -34,7 +34,7 @@ function LoginFormComponent(props: Props): JSX.Element {
                     },
                 ]}
             >
-                <Input autoComplete='username' style={{ height: 40, borderRadius: 4 }} placeholder='Username' />
+                <Input autoComplete='username' style={{ height: 40, borderRadius: 4 }} placeholder='Placeholder' />
             </Form.Item>
 
             <Form.Item
@@ -51,9 +51,9 @@ function LoginFormComponent(props: Props): JSX.Element {
             >
                 <Input
                     autoComplete='current-password'
-                    suffix={<LockOutlined style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    suffix={<EyeFilled style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
                     style={{ height: 40, borderRadius: 4 }}
-                    placeholder='Password'
+                    placeholder='Placeholder'
                     type='password'
                 />
             </Form.Item>
@@ -68,6 +68,7 @@ function LoginFormComponent(props: Props): JSX.Element {
                         borderRadius: 4,
                         marginTop: 10,
                         height: 40,
+                        fontWeight: 'bold',
                     }}
                     htmlType='submit'
                     className='login-form-button'
