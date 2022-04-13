@@ -6,7 +6,7 @@ import React from 'react';
 import Form from 'antd/lib/form';
 import Button from 'antd/lib/button';
 import Input from 'antd/lib/input';
-import { BoldOutlined, EyeFilled, EyeOutlined, LockOutlined } from '@ant-design/icons';
+import { EyeFilled } from '@ant-design/icons';
 
 export interface LoginData {
     username: string;

@@ -34,14 +34,13 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
             <Header style={{ backgroundColor: 'white' }}>
                 <PictureWrapper src={satcen} style={{ height: 45, paddingLeft: 200 }} />
             </Header>
-            <div style={{ height: '100%' }}>
+            <div>
                 <Content
                     className='background'
                     style={{
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        height: '100%',
                         padding: 30,
                     }}
                 >
