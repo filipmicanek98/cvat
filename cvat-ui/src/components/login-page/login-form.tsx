@@ -6,7 +6,7 @@ import React from 'react';
 import Form from 'antd/lib/form';
 import Button from 'antd/lib/button';
 import Input from 'antd/lib/input';
-import { EyeFilled } from '@ant-design/icons';
+import { EyeFilled, EyeInvisibleFilled, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 export interface LoginData {
     username: string;
@@ -49,12 +49,13 @@ function LoginFormComponent(props: Props): JSX.Element {
                     },
                 ]}
             >
-                <Input
+                <Input.Password
                     autoComplete='current-password'
-                    suffix={<EyeFilled style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
+                    // suffix={<EyeFilled style={{ color: 'rgba(0, 0, 0, 0.25)' }} />}
                     style={{ height: 40, borderRadius: 4 }}
                     placeholder='Placeholder'
                     type='password'
+                    iconRender={(visible) => (visible ? <EyeFilled /> : <EyeInvisibleFilled />)}
                 />
             </Form.Item>
 
