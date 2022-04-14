@@ -30,79 +30,84 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
     const { fetching, onLogin, renderResetPassword } = props;
 
     return (
+
         <Layout>
             <Header style={{ backgroundColor: 'white' }}>
                 <PictureWrapper src={satcen} style={{ height: 45, paddingLeft: 200 }} />
             </Header>
-            <div>
-                <Content
-                    className='background'
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        padding: 30,
-                    }}
-                >
-                    <Row justify='center' align='middle'>
-                        <div>
-                            <Card
-                                style={{
-                                    padding: 10,
-                                    width: 600,
-                                    height: 630,
-                                    borderRadius: 15,
-                                    boxShadow: '0px 1px 3px rgba(0,1,1,0.1)',
-                                    display: 'flex',
-                                    justifyContent: 'center',
+
+            <Content
+                className='background'
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh',
+                }}
+            >
+                <Row justify='center' align='middle'>
+
+                    <Card
+                        style={{
+                            padding: 10,
+                            width: 600,
+                            height: '70vh',
+                            borderRadius: 15,
+                            boxShadow: '0px 1px 3px rgba(0,1,1,0.1)',
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <Col
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                height: '60vh',
+                                width: 450,
+                            }}
+                        >
+                            <PictureWrapper src={croas} style={{ height: 200, marginBottom: 30 }} />
+
+                            <LoginForm
+                                fetching={fetching}
+                                onSubmit={(loginData: LoginData): void => {
+                                    onLogin(loginData.username, loginData.password);
                                 }}
-                            >
-                                <Col
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        height: 570,
-                                        width: 450,
-                                    }}
-                                >
-                                    <PictureWrapper src={croas} style={{ height: 200, marginBottom: 30 }} />
+                            />
 
-                                    <LoginForm
-                                        fetching={fetching}
-                                        onSubmit={(loginData: LoginData): void => {
-                                            onLogin(loginData.username, loginData.password);
-                                        }}
-                                    />
+                            {renderResetPassword && (
+                                <Row justify='start' align='top'>
+                                    <Col>
+                                        <Text strong>
+                                            <Link to='/auth/password/reset' style={{ color: '#1a3765' }}>
+                                                Forgot password?
+                                            </Link>
+                                        </Text>
+                                    </Col>
+                                </Row>
+                            )}
+                            <PictureWrapper src={disclaimer} style={{ paddingTop: 40 }} />
+                        </Col>
+                    </Card>
 
-                                    {renderResetPassword && (
-                                        <Row justify='start' align='top'>
-                                            <Col>
-                                                <Text strong>
-                                                    <Link to='/auth/password/reset' style={{ color: '#1a3765' }}>
-                                                        Forgot password?
-                                                    </Link>
-                                                </Text>
-                                            </Col>
-                                        </Row>
-                                    )}
-                                    <PictureWrapper src={disclaimer} style={{ paddingTop: 40 }} />
-                                </Col>
-                            </Card>
-                        </div>
-                    </Row>
-                </Content>
-            </div>
+                </Row>
+            </Content>
+
             <Footer
                 style={{
                     justifyContent: 'center',
                     display: 'flex',
                     alignItems: 'center',
                     backgroundColor: 'white',
+
                 }}
             >
-                SatCen 2022 © All rights reserved | <a href='https://www.satcen.europa.eu/'> www.satcen.europa.eu</a>
+                SatCen 2022 © All rights reserved |
+
+                <a href='https://www.satcen.europa.eu/'> www.satcen.europa.eu</a>
             </Footer>
+
             <FooterDrawer />
         </Layout>
     );
