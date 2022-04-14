@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: MIT
 
 import './styles.scss';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Link, withRouter } from 'react-router-dom';
 import Text from 'antd/lib/typography/Text';
@@ -26,14 +26,20 @@ interface LoginPageComponentProps {
 
 function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps): JSX.Element {
     const { Content } = Layout;
-
+    const [matches, setMatches] = useState(window.matchMedia('(min-width: 1300)').matches);
     const { fetching, onLogin, renderResetPassword } = props;
+
+    useEffect(() => {
+        window
+            .matchMedia('(min-width: 1300px)')
+            .addEventListener('change', (e) => { setMatches(e.matches); });
+    }, [matches]);
 
     return (
 
         <Layout>
-            <Header style={{ backgroundColor: 'white' }}>
-                <PictureWrapper src={satcen} style={{ height: 45, paddingLeft: 200 }} />
+            <Header style={{ backgroundColor: 'white', height: matches ? 60 : 55 }}>
+                <PictureWrapper src={satcen} style={{ height: matches ? 45 : 30, paddingLeft: 200 }} />
             </Header>
 
             <Content
@@ -42,16 +48,14 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '100vh',
+                    height: '100%',
                 }}
             >
                 <Row justify='center' align='middle'>
 
                     <Card
                         style={{
-                            padding: 10,
-                            width: 600,
-                            height: '70vh',
+                            padding: matches ? '10px 35px' : '8px 20px',
                             borderRadius: 15,
                             boxShadow: '0px 1px 3px rgba(0,1,1,0.1)',
                             display: 'flex',
@@ -63,11 +67,16 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
                                 display: 'flex',
                                 flexDirection: 'column',
                                 alignItems: 'center',
-                                height: '60vh',
-                                width: 450,
+                                width: matches ? 450 : 400,
                             }}
                         >
-                            <PictureWrapper src={croas} style={{ height: 200, marginBottom: 30 }} />
+                            <PictureWrapper
+                                src={croas}
+                                style={{
+                                    height: matches ? 160 : 80,
+                                    marginBottom: matches ? 20 : 10,
+                                }}
+                            />
 
                             <LoginForm
                                 fetching={fetching}
@@ -87,7 +96,13 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
                                     </Col>
                                 </Row>
                             )}
-                            <PictureWrapper src={disclaimer} style={{ paddingTop: 40 }} />
+                            <PictureWrapper
+                                src={disclaimer}
+                                style={{
+                                    paddingTop: matches ? 40 : 20,
+                                    height: matches ? 80 : 50,
+                                }}
+                            />
                         </Col>
                     </Card>
 
@@ -100,6 +115,7 @@ function LoginPageComponent(props: LoginPageComponentProps & RouteComponentProps
                     display: 'flex',
                     alignItems: 'center',
                     backgroundColor: 'white',
+                    height: matches ? 60 : 40,
 
                 }}
             >
