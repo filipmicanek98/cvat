@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Intel Corporation
+// Copyright (C) 2022 Intel Corporation
 //
 // SPDX-License-Identifier: MIT
 
@@ -55,7 +55,7 @@ export default class BasicConfigurationForm extends React.PureComponent<Props> {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input placeholder='Name your new scenario...' />
                 </Form.Item>
             </Form>
         );

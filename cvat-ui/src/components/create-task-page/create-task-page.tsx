@@ -1,4 +1,4 @@
-// Copyright (C) 2019-2021 Intel Corporation
+// Copyright (C) 2022 Intel Corporation
 //
 // SPDX-License-Identifier: MIT
 
@@ -19,13 +19,11 @@ interface Props {
     error: string;
     taskId: number | null;
     installedGit: boolean;
-    dumpers: []
+    dumpers: [];
 }
 
 export default function CreateTaskPage(props: Props): JSX.Element {
-    const {
-        error, status, taskId, onCreate, installedGit, dumpers,
-    } = props;
+    const { error, status, taskId, onCreate, installedGit, dumpers } = props;
 
     const location = useLocation();
 
@@ -73,7 +71,6 @@ export default function CreateTaskPage(props: Props): JSX.Element {
     return (
         <Row justify='center' align='top' className='cvat-create-task-form-wrapper'>
             <Col md={20} lg={16} xl={14} xxl={9}>
-                <Text className='cvat-title'>Create a new task</Text>
                 <CreateTaskContent
                     taskId={taskId}
                     projectId={projectId}

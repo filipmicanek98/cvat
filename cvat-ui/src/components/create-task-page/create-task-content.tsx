@@ -1,4 +1,4 @@
-// Copyright (C) 2020-2021 Intel Corporation
+// Copyright (C) 2022 Intel Corporation
 //
 // SPDX-License-Identifier: MIT
 
@@ -17,6 +17,8 @@ import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 import ConnectedFileManager from 'containers/file-manager/file-manager';
 import LabelsEditor from 'components/labels-editor/labels-editor';
 import { Files } from 'components/file-manager/file-manager';
+import { Form, Input, Upload } from 'antd';
+import { InboxOutlined } from '@ant-design/icons';
 import BasicConfigurationForm, { BaseConfiguration } from './basic-configuration-form';
 import ProjectSearchField from './project-search-field';
 import ProjectSubsetField from './project-subset-field';
@@ -39,7 +41,7 @@ interface Props {
     taskId: number | null;
     projectId: number | null;
     installedGit: boolean;
-    dumpers:[]
+    dumpers: [];
 }
 
 type State = CreateTaskData;
@@ -150,11 +152,11 @@ class CreateTaskContent extends React.PureComponent<Props & RouteComponentProps,
         });
     };
 
-    private handleSubmitAdvancedConfiguration = (values: AdvancedConfiguration): void => {
-        this.setState({
-            advanced: { ...values },
-        });
-    };
+    // private handleSubmitAdvancedConfiguration = (values: AdvancedConfiguration): void => {
+    //     this.setState({
+    //         advanced: { ...values },
+    //     });
+    // };
 
     private handleTaskSubsetChange = (value: string): void => {
         this.setState({
@@ -205,11 +207,11 @@ class CreateTaskContent extends React.PureComponent<Props & RouteComponentProps,
                 .catch((error: Error | ValidateErrorEntity): void => {
                     notification.error({
                         message: 'Could not create a task',
-                        description: (error as ValidateErrorEntity).errorFields ?
-                            (error as ValidateErrorEntity).errorFields
-                                .map((field) => `${field.name} : ${field.errors.join(';')}`)
-                                .map((text: string): JSX.Element => <div>{text}</div>) :
-                            error.toString(),
+                        description: (error as ValidateErrorEntity).errorFields
+                            ? (error as ValidateErrorEntity).errorFields
+                                  .map((field) => `${field.name} : ${field.errors.join(';')}`)
+                                  .map((text: string): JSX.Element => <div>{text}</div>)
+                            : error.toString(),
                         className: 'cvat-notification-create-task-fail',
                     });
                 });
@@ -300,37 +302,36 @@ class CreateTaskContent extends React.PureComponent<Props & RouteComponentProps,
     private renderFilesBlock(): JSX.Element {
         return (
             <Col span={24}>
-                <Text type='danger'>* </Text>
-                <Text className='cvat-text-color'>Select files</Text>
-                <ConnectedFileManager
-                    onChangeActiveKey={this.changeFileManagerTab}
-                    ref={(container: any): void => {
-                        this.fileManagerContainer = container;
-                    }}
-                />
+                <Upload.Dragger>
+                    <p className='ant-upload-drag-icon'>
+                        <InboxOutlined />
+                    </p>
+                    <p className='ant-upload-text'>Click or drag files to this area</p>
+                    <p className='ant-upload-hint'>You can upload bulk images or a single video</p>
+                </Upload.Dragger>
             </Col>
         );
     }
 
-    private renderAdvancedBlock(): JSX.Element {
-        const { installedGit, dumpers } = this.props;
-        const { activeFileManagerTab } = this.state;
-        return (
-            <Col span={24}>
-                <Collapse>
-                    <Collapse.Panel key='1' header={<Text className='cvat-title'>Advanced configuration</Text>}>
-                        <AdvancedConfigurationForm
-                            dumpers={dumpers}
-                            installedGit={installedGit}
-                            activeFileManagerTab={activeFileManagerTab}
-                            ref={this.advancedConfigurationComponent}
-                            onSubmit={this.handleSubmitAdvancedConfiguration}
-                        />
-                    </Collapse.Panel>
-                </Collapse>
-            </Col>
-        );
-    }
+    // private renderAdvancedBlock(): JSX.Element {
+    //     const { installedGit, dumpers } = this.props;
+    //     const { activeFileManagerTab } = this.state;
+    //     return (
+    //         <Col span={24}>
+    //             <Collapse>
+    //                 <Collapse.Panel key='1' header={<Text className='cvat-title'>Advanced configuration</Text>}>
+    //                     <AdvancedConfigurationForm
+    //                         dumpers={dumpers}
+    //                         installedGit={installedGit}
+    //                         activeFileManagerTab={activeFileManagerTab}
+    //                         ref={this.advancedConfigurationComponent}
+    //                         onSubmit={this.handleSubmitAdvancedConfiguration}
+    //                     />
+    //                 </Collapse.Panel>
+    //             </Collapse>
+    //         </Col>
+    //     );
+    // }
 
     public render(): JSX.Element {
         const { status } = this.props;
@@ -339,7 +340,7 @@ class CreateTaskContent extends React.PureComponent<Props & RouteComponentProps,
         return (
             <Row justify='start' align='middle' className='cvat-create-task-content'>
                 <Col span={24}>
-                    <Text className='cvat-title'>Basic configuration</Text>
+                    <Text className='cvat-title'>New scenario</Text>
                 </Col>
 
                 {this.renderBasicBlock()}
@@ -347,7 +348,40 @@ class CreateTaskContent extends React.PureComponent<Props & RouteComponentProps,
                 {this.renderSubsetBlock()}
                 {this.renderLabelsBlock()}
                 {this.renderFilesBlock()}
-                {this.renderAdvancedBlock()}
+                <Row justify='space-between'>
+                    <Col span={8}>
+                        <Form layout='vertical'>
+                            <Form.Item
+                                hasFeedback
+                                name='name'
+                                label={<span>Image quality</span>}
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Task name cannot be empty',
+                                    },
+                                ]}
+                            >
+                                <Input placeholder='Type quality in percentage' />
+                            </Form.Item>
+                        </Form>
+                    </Col>
+                    <Col span={8}>
+                        <Form layout='vertical'>
+                            <Form.Item name='name' label={<span>Grid size</span>}>
+                                <Input placeholder='Placeholder' />
+                            </Form.Item>
+                        </Form>
+                    </Col>
+                    <Col span={8}>
+                        <Form layout='vertical'>
+                            <Form.Item name='name' label={<span>Segment size</span>}>
+                                <Input placeholder='Placeholder' />
+                            </Form.Item>
+                        </Form>
+                    </Col>
+                </Row>
+                {/* {this.renderAdvancedBlock()} */}
 
                 <Col span={18}>{loading ? <Alert message={status} /> : null}</Col>
                 <Col span={6} className='cvat-create-task-submit-section'>
